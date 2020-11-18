@@ -6,21 +6,18 @@ require('three/examples/js/controls/OrbitControls');
 
 const canvasSketch = require('canvas-sketch');
 const pallets = require('nice-color-palettes');
-const random = require('canvas-sketch-util/random');
 
 const settings = {
   // Make the loop animated
   dimensions: [512, 512],
   fps: 24,
-  duration: 4,
+  duration: 6,
   animate: true,
   // Get a WebGL canvas rather than 2D
   context: 'webgl',
 };
 
 const sketch = ({ context, innerHeight, innerWidth }) => {
-  const pallet = random.pick(pallets);
-
   const renderer = new THREE.WebGLRenderer({
     context,
   });
@@ -32,14 +29,14 @@ const sketch = ({ context, innerHeight, innerWidth }) => {
 
   const firstCube = new THREE.Mesh(
     new THREE.BoxGeometry(5, 5, 5),
-    new THREE.MeshBasicMaterial({ color: random.pick(pallet) })
+    new THREE.MeshBasicMaterial({ color: 0x27ae60 })
   );
 
   scene.add(firstCube);
 
   const cube = new THREE.Mesh(
     new THREE.BoxGeometry(5, 5, 5),
-    new THREE.MeshBasicMaterial({ color: random.pick(pallet) })
+    new THREE.MeshBasicMaterial({ color: 0xf39c12 })
   );
 
   scene.add(cube);
@@ -63,11 +60,13 @@ const sketch = ({ context, innerHeight, innerWidth }) => {
       renderer.setSize(viewportWidth, viewportHeight);
     },
     // And render events here
-    render() {
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      firstCube.rotation.x -= 0.01;
-      firstCube.rotation.y -= 0.01;
+    render({ playhead }) {
+      cube.rotation.x += playhead * 0.05;
+
+      cube.rotation.y += playhead * 0.05;
+      firstCube.rotation.x -= playhead * 0.05;
+      firstCube.rotation.y -= playhead * 0.05;
+
       renderer.render(scene, camera);
     },
     // Dispose of WebGL context (optional)

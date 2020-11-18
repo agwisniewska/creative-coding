@@ -30,8 +30,8 @@ const head = () => {
   stroke('black');
   strokeWeight(1);
   line(220, 220, 270, 280);
-  line(290, 245, 350, 225);
-  line(290, 150, 250, 270);
+  line(290, 255, 300, 260);
+  line(270, 200, 260, 250);
 };
 
 const neck = () => {
@@ -56,27 +56,9 @@ const body = () => {
 
 const sketch = () => {
   strokeWeight(2);
+  background(255);
 
   return ({ context, width, height }) => {
-    noStroke();
-    fill(150);
-    let y = 0;
-    let x = 0;
-    for (let i = 0; i <= 3; i++) {
-      ellipse(x, y, 150, 150);
-      if (i % 2 !== 0) {
-        x += width - 100;
-        y -= 100;
-      }
-
-      if (i % 2 === 0) {
-        y += height - 100;
-        x += 100;
-      }
-    }
-
-    ellipseMode(CENTER);
-
     head();
     neck();
     body();
