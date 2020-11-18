@@ -6,6 +6,7 @@ require('three/examples/js/controls/OrbitControls');
 
 const canvasSketch = require('canvas-sketch');
 const pallets = require('nice-color-palettes');
+const random = require('canvas-sketch-util/random');
 
 const settings = {
   // Make the loop animated
@@ -18,6 +19,8 @@ const settings = {
 };
 
 const sketch = ({ context, innerHeight, innerWidth }) => {
+  const pallet = random.pick(pallets);
+
   const renderer = new THREE.WebGLRenderer({
     context,
   });
@@ -29,20 +32,20 @@ const sketch = ({ context, innerHeight, innerWidth }) => {
 
   const firstCube = new THREE.Mesh(
     new THREE.BoxGeometry(5, 5, 5),
-    new THREE.MeshBasicMaterial({ color: 0x27ae60 })
+    new THREE.MeshBasicMaterial({ color: random.pick(pallet) })
   );
 
   scene.add(firstCube);
 
   const cube = new THREE.Mesh(
     new THREE.BoxGeometry(5, 5, 5),
-    new THREE.MeshBasicMaterial({ color: 0xf39c12 })
+    new THREE.MeshBasicMaterial({ color: random.pick(pallet) })
   );
 
   scene.add(cube);
 
   const camera = new THREE.PerspectiveCamera(
-    75,
+    120,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
