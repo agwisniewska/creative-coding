@@ -11,7 +11,7 @@ new p5();
 
 const settings = {
   p5: true,
-  dimensions: [512, 512],
+  dimensions: [1080, 1080],
 };
 
 

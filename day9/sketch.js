@@ -8,12 +8,17 @@ const p5 = require('p5');
 new p5();
 
 
+// $corn: #EDE342ff;
+// $maximum-yellow-red: #F2BF6Cff;
+// $pastel-pink: #F69A97ff;
+// $persian-pink: #FB76C1ff;
+// $purple-pizzazz: #FF51EBff;
 const colors = [
-  '#EF476F',
-  '#FFD166',
-  '#06D6A0',
-  '#118AB2',
-  '#073B4C'
+  '#EDE342ff',
+  '#F2BF6Cff',
+  '#F69A97ff',
+  '#FB76C1ff',
+  '#FF51EBff'
 ]
 
 const settings = {
@@ -29,11 +34,13 @@ let foreground;
 
 
 const generateBackground = () => {
-  for (let i = 0; i < width; i += 20) {
-    for (let j = 0; j < height; j += 20) {
-      stroke('#fff');
-      fill('#118AB2');
-      rect(i, j, 20, 20);
+  let steps = 40;
+  let step = (width/steps);
+  for (let i = 0 + 100; i < width - 100; i += 20) {
+    for (let j = 0 + 100; j < height - 100; j += 20) {
+      stroke('#000');
+      fill('#fff');
+      rect(i, j, step, step);
     }
   }
 }
@@ -43,15 +50,17 @@ const generateRandomStyle = (start, end) => {
   const fillRandomVal = floor(random(0, 5));
   const generatedColor = colors[fillRandomVal]
 
-  foreground.stroke('#073B4C')
-  foreground.strokeWeight(4);
+  const strokeRandomVal = floor(random(0, 5));
+  const strokeColor = colors[strokeRandomVal];
+  
+  foreground.stroke('#000')
   foreground.fill(generatedColor);
 
 }
 
 const generateForeground = () => {
-  for (let i = 0; i < r; i++) {
-    for (let j = 0; j < c; j++) {
+  for (let i = 0; i <= r; i++) {
+    for (let j = 0; j <= c; j++) {
       renderCell(i, j);
     }
   }
@@ -69,18 +78,7 @@ const renderRandomShape = (shapeX, shapeY) => {
 
   let ran = random(0, 10);
   let shape = (ran < 5) ? CHORD : PIE;
-  
-  foreground.blendMode(REMOVE);
-  foreground.arc(shapeX, shapeY, cellWidth - 25, cellHeight - 25, start, stop, shape);
-
-  foreground.blendMode(BLEND);
-
-  if ((ran < 5)) {
-    foreground.noFill();
-  }
-  foreground.arc(shapeX, shapeY, cellWidth - 25, cellHeight - 25, start, stop, shape);
-
- 
+  foreground.arc(shapeX, shapeY, cellWidth - 50, cellHeight - 50, start, stop, shape);
 }
 
 const renderCell = (row, column) => {
@@ -101,7 +99,6 @@ const sketch = () => {
 
 
   return ({ context, width, height }) => {
-    foreground.background('#073B4C');
     foreground.strokeWeight(3);
 
 

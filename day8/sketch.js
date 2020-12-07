@@ -10,17 +10,18 @@ new p5();
 
 const settings = {
   p5: true,
-  dimensions: [512, 512],
+  dimensions: [1080, 1080],
 };
 
 const sketch = () => {
 
   background(255);
   return ({ context, width, height }) => {
-    for (var x = 0; x <= width; x+= 8) {
+    for (var x = 100; x <= width - 100; x+= 10) {
 
-      for (var y = 0; y <= height; y += 8) {
-          line(x, y, 100, 100);
+      for (var y = 100; y <= height - 100; y += 10) {
+          stroke('#F69A97');
+          line(x, y, 200, 200);
         }
       } 
   };
